@@ -4,7 +4,7 @@ Prototipo web de una plataforma de prevención del estrés térmico y cuidado pe
 
 ## Estructura
 
-- `index.html`: landing pública.
+- `pages/index.html`: landing pública.
 - `pages/auth/`: inicio de sesión, registro y recuperación de contraseña.
 - `pages/app/`: módulos internos de monitoreo y prevención.
 - `css/`: estilos globales del sitio.
@@ -13,4 +13,4 @@ Prototipo web de una plataforma de prevención del estrés térmico y cuidado pe
 
 ## Ejecución
 
-Abre `index.html` en un navegador o sirve la carpeta con cualquier servidor estático. La aplicación utiliza `localStorage` para conservar el estado simulado del prototipo.
+Abre `pages/index.html` en un navegador o sirve la carpeta con cualquier servidor estático. La aplicación utiliza `localStorage` para conservar el estado simulado del prototipo.
