@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recuperar Contraseña — SOLAR</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="auth-shell">
+        <div class="auth-brand-panel">
+            <div>
+                <a href="index.html" class="brand-logo">
+                    <div class="logo-mark">☀️</div>
+                    <div>
+                        SOLAR
+                        <small>Prevención Térmica</small>
+                    </div>
+                </a>
+                <img class="auth-brand-img" src="https://images.unsplash.com/photo-1575311373937-040b8e1fd5b6?auto=format&fit=crop&w=900&q=80" alt="Dispositivo wearable Solar Band sincronizado">
+                <h2 style="font-size: 1.9rem; line-height: 1.25; margin-bottom: 12px;">Recuperación segura de acceso</h2>
+                <p style="color: var(--text-on-dark-muted); font-size: 0.96rem;">
+                    Restablece tu contraseña para volver a consultar tus alertas térmicas e historial de exposición.
+                </p>
+            </div>
+            <div style="font-size: 0.85rem; color: var(--text-on-dark-muted); border-top: 1px solid rgba(255,255,255,0.15); padding-top: 16px;">
+                SOLAR · Seguridad y Protección de Cuenta
+            </div>
+        </div>
+
+        <div class="auth-form-panel">
+            <div class="auth-card">
+                <div style="margin-bottom: 22px;">
+                    <span class="section-tag">Soporte de Acceso</span>
+                    <h1 style="font-size: 1.7rem; font-weight: 800; color: var(--brand-deep); margin-bottom: 6px;">Recuperar contraseña</h1>
+                    <p style="font-size: 0.92rem; color: var(--text-secondary);">Ingresa el correo asociado a tu cuenta para enviarte un enlace de restablecimiento.</p>
+                </div>
+
+                <div id="recFeedback" class="feedback-banner"></div>
+
+                <form id="recoveryForm" onsubmit="handleRecovery(event)" novalidate>
+                    <div class="form-group">
+                        <label for="recEmail">Correo electrónico registrado *</label>
+                        <input type="email" id="recEmail" class="form-control" placeholder="tu@correo.com" required>
+                    </div>
+                    <button type="submit" class="btn-primary" style="width: 100%; padding: 13px;">Enviar enlace de recuperación →</button>
+                </form>
+
+                <div style="margin-top: 24px; padding-top: 18px; border-top: 1px solid var(--border-color); text-align: center; font-size: 0.9rem; display: flex; flex-direction: column; gap: 8px;">
+                    <div><a href="login.html" style="color: var(--brand-secondary); font-weight: 700;">← Volver a Iniciar sesión</a></div>
+                    <div><a href="index.html" style="color: var(--text-muted);">Ir a la página principal</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function handleRecovery(e) {
+            e.preventDefault();
+            const email = document.getElementById('recEmail').value.trim();
+            const fb = document.getElementById('recFeedback');
+
+            if (!email || !email.includes('@')) {
+                fb.className = 'feedback-banner error';
+                fb.textContent = 'Por favor, ingresa una dirección de correo electrónico válida.';
+                return;
+            }
+
+            fb.className = 'feedback-banner success';
+            fb.innerHTML = `<strong>Solicitud enviada:</strong> Hemos enviado las instrucciones de restablecimiento a <em>${email}</em>. Revisa tu bandeja de entrada o carpeta de spam.`;
+            document.getElementById('recoveryForm').reset();
+        }
+    </script>
+</body>
+</html>

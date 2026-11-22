@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión — SOLAR</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="auth-shell">
+        <div class="auth-brand-panel">
+            <div>
+                <a href="index.html" class="brand-logo">
+                    <div class="logo-mark">☀️</div>
+                    <div>
+                        SOLAR
+                        <small>Prevención Térmica</small>
+                    </div>
+                </a>
+                <img class="auth-brand-img" src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=900&q=80" alt="Persona con pulsera inteligente realizando actividad física al aire libre">
+                <h2 style="font-size: 1.9rem; line-height: 1.25; margin-bottom: 12px;">Monitoreo térmico inteligente en tiempo real</h2>
+                <p style="color: var(--text-on-dark-muted); font-size: 0.96rem;">
+                    Accede a tu panel de prevención, sincroniza tu Solar Band y consulta recomendaciones personalizadas según el clima y tu esfuerzo físico.
+                </p>
+            </div>
+            <div style="font-size: 0.85rem; color: var(--text-on-dark-muted); border-top: 1px solid rgba(255,255,255,0.15); padding-top: 16px;">
+                Plataforma preventiva de bienestar · No sustituye evaluación médica.
+            </div>
+        </div>
+
+        <div class="auth-form-panel">
+            <div class="auth-card">
+                <div style="margin-bottom: 24px;">
+                    <span class="section-tag">Acceso Seguro</span>
+                    <h1 style="font-size: 1.75rem; font-weight: 800; color: var(--brand-deep); margin-bottom: 6px;">Iniciar sesión</h1>
+                    <p style="font-size: 0.92rem; color: var(--text-secondary);">Ingresa tus credenciales para abrir tu dashboard SOLAR.</p>
+                </div>
+
+                <div id="loginFeedback" class="feedback-banner"></div>
+
+                <form id="loginForm" onsubmit="handleLogin(event)" novalidate>
+                    <div class="form-group">
+                        <label for="loginEmail">Correo electrónico *</label>
+                        <input type="email" id="loginEmail" class="form-control" value="camila@solar.pe" placeholder="usuario@dominio.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="loginPass">Contraseña *</label>
+                        <div class="password-wrapper">
+                            <input type="password" id="loginPass" class="form-control" value="Solar2026!" placeholder="Ingresa tu contraseña" required>
+                            <button type="button" class="toggle-pass-btn" onclick="togglePass('loginPass', this)">Mostrar</button>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; font-size: 0.86rem;">
+                        <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; color: var(--text-secondary);">
+                            <input type="checkbox" id="rememberMe" checked> Recordar sesión en este equipo
+                        </label>
+                        <a href="recovery.html" style="color: var(--brand-secondary); font-weight: 700;">¿Olvidaste tu contraseña?</a>
+                    </div>
+
+                    <button type="submit" class="btn-accent" style="width: 100%; padding: 13px;">Ingresar al Dashboard →</button>
+                </form>
+
+                <div style="margin-top: 24px; padding-top: 18px; border-top: 1px solid var(--border-color); display: flex; flex-direction: column; gap: 10px; text-align: center; font-size: 0.9rem;">
+                    <div>¿Aún no tienes una cuenta? <a href="register.html" style="color: var(--brand-accent-hover); font-weight: 700;">Regístrate aquí</a></div>
+                    <div><a href="index.html" style="color: var(--text-muted);">← Volver a la página principal</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="solar-app.js"></script>
+    <script>
+        function togglePass(inputId, btn) {
+            const inp = document.getElementById(inputId);
+            if (inp.type === 'password') {
+                inp.type = 'text';
+                btn.textContent = 'Ocultar';
+            } else {
+                inp.type = 'password';
+                btn.textContent = 'Mostrar';
+            }
+        }
+
+        function handleLogin(e) {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value.trim();
+            const pass = document.getElementById('loginPass').value;
+            const fb = document.getElementById('loginFeedback');
+
+            if (!email || !email.includes('@')) {
+                fb.className = 'feedback-banner error';
+                fb.textContent = 'Por favor, ingresa un correo electrónico válido.';
+                return;
+            }
+            if (!pass || pass.length < 6) {
+                fb.className = 'feedback-banner error';
+                fb.textContent = 'La contraseña debe tener al menos 6 caracteres.';
+                return;
+            }
+
+            const state = SolarState.load();
+            state.user.email = email;
+            state.user.loggedIn = true;
+            SolarState.save(state);
+
+            fb.className = 'feedback-banner success';
+            fb.textContent = 'Credenciales verificadas. Redirigiendo a tu panel de monitoreo...';
+            setTimeout(() => {
+                window.location.href = 'dashboard.html';
+            }, 650);
+        }
+    </script>
+</body>
+</html>
