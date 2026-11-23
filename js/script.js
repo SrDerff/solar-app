@@ -4,7 +4,6 @@ document.querySelectorAll('.site-nav a').forEach(link=>link.addEventListener('cl
 document.querySelector('[data-video]')?.addEventListener('click',()=>{modal.classList.add('open');modal.setAttribute('aria-hidden','false')});
 document.querySelector('[data-close]')?.addEventListener('click',closeModal);modal?.addEventListener('click',event=>{if(event.target===modal)closeModal()});
 function closeModal(){modal.classList.remove('open');modal.setAttribute('aria-hidden','true')}
-document.querySelector('.pill-button.small')?.addEventListener('click',()=>{toast.textContent='Pre-registro: pronto podrás dejar tus datos.';toast.classList.add('show');window.setTimeout(()=>toast.classList.remove('show'),2600)});
 
 const demoContent = document.querySelector('#demoContent');
 const demoViews = {
@@ -20,3 +19,18 @@ document.querySelector('#contactForm')?.addEventListener('submit',(event)=>{even
 
 const contactIntro = document.querySelector('.contact-section>div');
 if(contactIntro && !contactIntro.querySelector('.contact-benefits')) contactIntro.insertAdjacentHTML('beforeend','<div class="contact-benefits"><article><span>◎</span><h3>Instituciones</h3><p>Colegios, universidades y empresas.</p></article><article><span>↗</span><h3>Equipos deportivos</h3><p>Monitoreo y prevención para entrenamientos.</p></article><article><span>＋</span><h3>Jornadas laborales</h3><p>Seguridad y bienestar en el trabajo.</p></article></div>');
+
+document.querySelectorAll('.faq-list details').forEach((detail) => {
+  if (detail.open) detail.classList.add('is-open');
+  detail.querySelector('summary')?.addEventListener('click', (event) => {
+    event.preventDefault();
+    const shouldOpen = !detail.classList.contains('is-open');
+    if (shouldOpen) {
+      detail.open = true;
+      requestAnimationFrame(() => detail.classList.add('is-open'));
+    } else {
+      detail.classList.remove('is-open');
+      window.setTimeout(() => { detail.open = false; }, 280);
+    }
+  });
+});

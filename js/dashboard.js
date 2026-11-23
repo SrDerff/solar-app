@@ -31,7 +31,7 @@ function switchView(view) {
   if (view === 'alertas') renderAlerts(); if (view === 'historial') renderHistory(); if (view === 'monitoreo') renderMonitor(); if (view === 'wearable') renderWearable(); if (view === 'perfil') renderProfile();
 }
 
-$$('.dashboard-nav').forEach(button => button.addEventListener('click', () => switchView(button.dataset.view)));
+$$('.dashboard-nav').forEach(button => button.addEventListener('click', () => { switchView(button.dataset.view); $('#dashboardSidebar').classList.remove('open'); $('#dashboardMenu').setAttribute('aria-expanded','false'); }));
 $('#dashboardMenu').addEventListener('click', () => $('#dashboardSidebar').classList.toggle('open'));
 $('#syncButton').addEventListener('click', () => { const state = dashboardState(); state.wearable.dataFresh = true; state.wearable.lastSyncTimestamp = Date.now(); SolarState.save(state); $('#topSync').textContent = 'Sincronizado hace instantes'; syncShell(); });
 $('#hydrateButton').addEventListener('click', () => { const state = dashboardState(); state.physiology.exposureMinutesToday = Math.max(0, state.physiology.exposureMinutesToday - 5); SolarState.save(state); $('#riskAction').textContent = 'Hidratación registrada. Continúa atento a tu ritmo y al entorno.'; syncShell(); });
