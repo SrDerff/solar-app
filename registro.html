@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registro — Solar</title>
+    <link rel="icon" href="favicon.ico" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="auth.css" />
+  </head>
+  <body class="auth-page">
+    <main class="auth-shell">
+      <a class="auth-brand" href="index.html"><img src="favicon.ico" alt="" />Solar<span>PREVENCIÓN TÉRMICA</span></a>
+      <section class="auth-card">
+        <div class="auth-copy">
+          <p class="eyebrow">ÚNETE A SOLAR</p>
+          <h1>Empieza a cuidarte<br /><span>bajo el mismo sol.</span></h1>
+          <p>Crea tu cuenta y conecta tus hábitos, tu contexto y tu Solar Band en un solo lugar.</p>
+          <a class="auth-back" href="index.html">← Volver a Solar</a>
+        </div>
+        <form class="auth-form" id="registerForm">
+          <h2>Crear cuenta</h2>
+          <p class="auth-muted">Configura tu acceso al panel preventivo.</p>
+          <label>Nombre<input type="text" name="name" required placeholder="Tu nombre" /></label>
+          <label>Correo electrónico<input type="email" name="email" required placeholder="tu@correo.com" /></label>
+          <label>Contraseña<input type="password" name="password" minlength="6" required placeholder="Mínimo 6 caracteres" /></label>
+          <button class="auth-submit" type="submit">Crear cuenta <span>→</span></button>
+          <p class="auth-switch">¿Ya tienes cuenta? <a href="login.html">Inicia sesión</a></p>
+          <p class="auth-feedback" id="authFeedback"></p>
+        </form>
+      </section>
+    </main>
+    <script src="auth.js"></script>
+  </body>
+</html>
